@@ -35,8 +35,8 @@ export default {
 
   me: async (_, args, { user }) => {
     try {
-      await requireAuth(user)
-      return User.findById(user._id)
+      const me = await requireAuth(user)
+      return me;
     } catch (error) {
       throw error;
     }

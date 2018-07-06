@@ -21,7 +21,7 @@ export default {
     createTweet: async (_, args, { user }) => {
       try {
         await requireAuth(user); // { user } is context of user
-        return Tweet.create(args)
+        return Tweet.create({ ...args, user: user._id });
       } catch (error) {
         throw error;  
       }
