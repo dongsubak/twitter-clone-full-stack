@@ -29,7 +29,16 @@ export default {
     updateTweet: async (_, { _id, ... rest }, { user }) => {
       try {
         await requireAuth(user); // { user } is context of user
-        return Tweet.findByIdAndUpdate(_id, rest, { new: true })
+        const tweet = await Tweet.findOne({ _id, user: user._id });
+
+        if (!tweet) {
+          throw new Error('Not found!');
+        } 
+
+        Object.entries(rest).forEach(([key, value]) => {
+          tweet[key] = value;
+        });
+        return tweet.save();
       } catch (error) {
         throw error;  
       }
