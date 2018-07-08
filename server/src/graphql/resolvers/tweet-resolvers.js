@@ -18,6 +18,14 @@ export default {
         throw error;
       }
     },
+    getUserTweets: async (_, args, { user }) => {
+      try {
+        await requireAuth(user);
+        return Tweet.find({ user: user._id }).sort({ createdAt: -1})
+      } catch (error) {
+        throw error;
+      }
+    },
     createTweet: async (_, args, { user }) => {
       try {
         await requireAuth(user); // { user } is context of user
@@ -38,6 +46,7 @@ export default {
         Object.entries(rest).forEach(([key, value]) => {
           tweet[key] = value;
         });
+
         return tweet.save();
       } catch (error) {
         throw error;  
@@ -46,7 +55,12 @@ export default {
     deleteTweet: async (_, { _id }, { user }) => {
       try {
         await requireAuth(user);
-        await Tweet.findByIdAndRemove(_id);
+        const tweet = await Tweet.findOne({ _id, user: user._id });
+
+        if (!tweet) {
+          throw new Error('Not found!');
+        } 
+        await tweet.remove();
         return {
           message: 'Delete Success!'
         }
