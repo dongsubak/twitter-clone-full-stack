@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
+import { graphql } from 'react-apollo';
+import { ActivityIndicator, FlatList } from 'react-native';
+
+import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
 
 import FeedCard from '../components/FeedCard/FeedCard';
 
@@ -15,20 +19,28 @@ const List = styled.ScrollView`
 // alignItems이든, justifyContent 든 flex-start 하면, flexDirection에 따라 결정.
 
 class HomeScreen extends Component {
-  state = { }
+  _renderItem = ({ item }) => <FeedCard {...item} />
   render() {
+    const { data } = this.props;
+    if (data.loading) {
+      return (
+        <Root>
+          <ActivityIndicator size="large" />
+        </Root>
+      )
+    }
     return (
       <Root>
-        <List>
-          <FeedCard />
-          <FeedCard />
-          <FeedCard />
-          <FeedCard />
-          <FeedCard />
-        </List>
+        <FlatList
+          contentContainerStyle={{ alignSelf: 'stretch' }}
+          data={data.getTweets}
+          keyExtractor={item => item._id} 
+          renderItem={this._renderItem}
+        />
+        
       </Root>
     );
   }
 }
 
-export default HomeScreen;
+export default graphql(GET_TWEETS_QUERY)(HomeScreen);
