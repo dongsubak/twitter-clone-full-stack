@@ -6,8 +6,10 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://192.168.0.92:3000/graphql',
 });
+// ethernet adapter ip 로 한다.
+// https://www.youtube.com/watch?v=shstJgkLW-I
 
 export const client = new ApolloClient({
   networkInterface,

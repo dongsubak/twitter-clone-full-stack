@@ -20,6 +20,7 @@ const List = styled.ScrollView`
 
 class HomeScreen extends Component {
   _renderItem = ({ item }) => <FeedCard {...item} />
+  // <FeedCard text={item.text} user={item.user} createdAt={item.createdAt} favoriteCount={item.favoriteCount} />
   render() {
     const { data } = this.props;
     if (data.loading) {
@@ -37,7 +38,6 @@ class HomeScreen extends Component {
           keyExtractor={item => item._id} 
           renderItem={this._renderItem}
         />
-        
       </Root>
     );
   }
