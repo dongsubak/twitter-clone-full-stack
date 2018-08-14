@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import Touchable from '@appandflow/touchable';
+// import Touchable from '@appandflow/touchable';
 
 import SignupForm from '../components/SignupForm';
 
@@ -15,7 +15,7 @@ const ButtonSignupText = styled.Text`
   fontWeight: bold;
   fontSize: 20;
 `;
-
+// =styled(Touchable).attr({})는 에러가 났다.
 const ButtonSignup = styled.TouchableOpacity.attrs({
   feedback: 'opacity'
 })`
@@ -32,9 +32,10 @@ const ButtonSignup = styled.TouchableOpacity.attrs({
   shadowOpacity: 0.4;
   shadowRadius: 5;
   shadowOffset: 0px 4px; 
-  shadowColor: #000
-  overflow: hidden
+  shadowColor: #000;
+  elevation: 2;  
 `
+// overflow: hidden;
 // 0 from the isle? 4px from the left
 
 const BottomTextContainer = styled.View`
@@ -46,7 +47,7 @@ const BottomTextContainer = styled.View`
   justifyContent: center;
   alignItems: center;
 `;
-
+// =styled(Touchable).attr({})는 에러가 났다.
 const ButtonLogin = styled.TouchableOpacity.attrs({
   feedback: 'opacity',
   hitSlop: { top: 20, bottom: 20, right: 20, left: 20 }
@@ -62,14 +63,15 @@ const ButtonLoginText = styled.Text`
 `;
 
 const initialState = { 
-  showSignup: false,
-  showLogin: false
+  showSignup: true,
+  showLogin: false,
 }
 
 class AuthenticationScreen extends Component {
   state = initialState;
 
   _onShowSignupPress = () => this.setState({ showSignup: true });
+  _onBackPress = () => this.setState({ ...initialState });
 
   render() {
     if (this.state.showSignup) {

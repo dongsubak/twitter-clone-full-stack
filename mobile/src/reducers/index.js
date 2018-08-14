@@ -9,4 +9,4 @@ export default client => combineReducers({
   user
 });
 
-//state로 존재함.
+// state로 존재함.
