@@ -104,7 +104,7 @@ class SignupForm extends Component {
   _checkIfDisable() {
     const { fullName, email, password, username } = this.state;
 
-    if (!fullName || !email|| !password, !username) {
+    if (!fullName || !email || !password || !username) {
       return true;
     }
     return false;
