@@ -67,6 +67,8 @@ const initialState = {
   showLogin: false,
 }
 
+//  showSignup: true로 바꾸고 진행.
+
 class AuthenticationScreen extends Component {
   state = initialState;
 
