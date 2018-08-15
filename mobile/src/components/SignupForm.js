@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Platform, Keyboard } from 'react-native';
+import { Platform, Keyboard, AsyncStorage } from 'react-native';
 import Touchable from '@appandflow/touchable';
+import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
 
-import { colors } from '../utils/constants';
+import { colors, fakeAvatar } from '../utils/constants';
+import SIGNUP_MUTATION from '../graphql/mutations/signup';
+import Loading from '../components/Loading';
+import { login } from '../actions/user';
+
+console.log(login);
 
 const Root = styled(Touchable).attrs({
   feedback: 'none'
@@ -80,12 +87,13 @@ const Input = styled.TextInput.attrs({
 
 // const Input = styled.TextInput``;
 
-class SignupFrom extends Component {
+class SignupForm extends Component {
   state = {
     fullName: '',
     email: '',
     password: '',
     username: '',
+    loading: false,
   };
 
   _onOutsidePress = () => Keyboard.dismiss();
@@ -98,11 +106,39 @@ class SignupFrom extends Component {
 
     if (!fullName || !email|| !password, !username) {
       return true;
-    } else {
-      return false;
+    }
+    return false;
+  }
+
+  _onSignupPress = async () => {
+    this.setState({ loading: true });
+
+    const { fullName, email, password, username } = this.state;
+    const avatar = fakeAvatar;
+  
+    try {
+      const { data } = await this.props.mutate({
+        variables: {
+          fullName,
+          email, 
+          password, 
+          username,
+          avatar
+        }
+      });  
+      await AsyncStorage.setItem('@twitteryoutubeclone', data.signup.token);
+      this.setState({ loading: false });
+      console.log('loading false');
+      return this.props.login();
+    } catch (error) {
+      throw error;
     }
   }
+  
   render() {
+    if (this.state.loading) {
+      return <Loading />
+    }
     return (
       <Root onPress={this._onOutsidePress}>
         <BackButton onPress={this.props.onBackPress}>
@@ -118,7 +154,8 @@ class SignupFrom extends Component {
           </InputWrapper>
           <InputWrapper>
             <Input 
-              placeholder="Email" 
+              placeholder="Email"
+              autoCapitalize="none"
               keyboardType="email-address"
               onChangeText={text => this._onChangeText(text, 'email')}
             />
@@ -138,8 +175,8 @@ class SignupFrom extends Component {
             />
           </InputWrapper>
         </Wrapper>
-        <ButtonConfirm>
-          <ButtonConfirmText disabled={this._checkIfDisable()}>
+        <ButtonConfirm onPress={this._onSignupPress} disabled={this._checkIfDisable()}>
+          <ButtonConfirmText>
             Sign Up
           </ButtonConfirmText>
         </ButtonConfirm>
@@ -148,4 +185,9 @@ class SignupFrom extends Component {
   }
 }
 
-export default SignupFrom;
+// www.apollographql.com/docs/react/recipes/recompose.html
+
+export default compose(
+  graphql(SIGNUP_MUTATION),
+  connect(undefined, { login }) ,
+)(SignupForm);
