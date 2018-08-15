@@ -63,7 +63,7 @@ const ButtonLoginText = styled.Text`
 `;
 
 const initialState = { 
-  showSignup: true,
+  showSignup: false,
   showLogin: false,
 }
 
@@ -77,7 +77,7 @@ class AuthenticationScreen extends Component {
     if (this.state.showSignup) {
       return (
         <Root>
-          <SignupForm />
+          <SignupForm onBackPress={this._onBackPress} />
         </Root>
       )
     }

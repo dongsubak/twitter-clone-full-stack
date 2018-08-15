@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
-// import Touchable from '@appandflow/touchable';
+import { Platform, Keyboard } from 'react-native';
+import Touchable from '@appandflow/touchable';
 
 import { colors } from '../utils/constants';
 
-const Root = styled.View`
+const Root = styled(Touchable).attrs({
+  feedback: 'none'
+})`
   flex: 1;
   position: relative;
   justifyContent: center;
@@ -61,27 +64,80 @@ const InputWrapper = styled.View`
   borderBottomWidth: 1;
   borderBottomColor: ${props => props.theme.LIGHT_GRAY};
   marginVertical: 5;
+  justifyContent: flex-end;
 `;
+
+const Input = styled.TextInput.attrs({ 
+  placeholderTextColor: colors.LIGHT_GRAY,
+  selectionColor: Platform.OS === 'ios' ? colors.PRAIMARY : undefined,
+  autoCorrect: false,
+})`
+  height: 30;
+  color: ${props => props.theme.WHITE};
+`
 
 // const Input = styled.TextInput``;
 
 class SignupFrom extends Component {
-  state = { // showSignup: false 
+  state = {
+    fullName: '',
+    email: '',
+    password: '',
+    username: '',
   };
+
+  _onOutsidePress = () => Keyboard.dismiss();
+  
+  _onChangeText = (text, type) => this.setState({ [type]: text });
+  // [type] 
+
+  _checkIfDisable() {
+    const { fullName, email, password, username } = this.state;
+
+    if (!fullName || !email|| !password, !username) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   render() {
     return (
-      <Root>
+      <Root onPress={this._onOutsidePress}>
         <BackButton onPress={this.props.onBackPress}>
           <MaterialIcons color={colors.WHITE} size={30} name="arrow-back" />
         </BackButton>
         <Wrapper>
-          <InputWrapper />
-          <InputWrapper />
-          <InputWrapper />
-          <InputWrapper />
+          <InputWrapper>
+            <Input 
+              placeholder="Full Name" 
+              autoCapitalize="words"
+              onChangeText={text => this._onChangeText(text, 'fullName')}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Input 
+              placeholder="Email" 
+              keyboardType="email-address"
+              onChangeText={text => this._onChangeText(text, 'email')}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Input 
+              placeholder="Password"
+              secureTextEntry
+              onChangeText={text => this._onChangeText(text, 'password')}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <Input 
+              placeholder="Username"
+              autoCapitalize="none"
+              onChangeText={text => this._onChangeText(text, 'username')}
+            />
+          </InputWrapper>
         </Wrapper>
         <ButtonConfirm>
-          <ButtonConfirmText>
+          <ButtonConfirmText disabled={this._checkIfDisable()}>
             Sign Up
           </ButtonConfirmText>
         </ButtonConfirm>
