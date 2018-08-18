@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Platform, Keyboard, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Platform, Keyboard, AsyncStorage } from 'react-native';
 import Touchable from '@appandflow/touchable';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -10,8 +10,6 @@ import { colors, fakeAvatar } from '../utils/constants';
 import SIGNUP_MUTATION from '../graphql/mutations/signup';
 import Loading from '../components/Loading';
 import { login } from '../actions/user';
-
-console.log(login);
 
 const Root = styled(Touchable).attrs({
   feedback: 'none'
@@ -103,7 +101,6 @@ class SignupForm extends Component {
 
   _checkIfDisable() {
     const { fullName, email, password, username } = this.state;
-
     if (!fullName || !email || !password || !username) {
       return true;
     }
@@ -126,9 +123,9 @@ class SignupForm extends Component {
           avatar
         }
       });  
-      await AsyncStorage.setItem('@twitteryoutubeclone', data.signup.token);
+      await AsyncStorage.setItem('@twitterclone', data.signup.token);
+      console.log('loading');
       this.setState({ loading: false });
-      console.log('loading false');
       return this.props.login();
     } catch (error) {
       throw error;
@@ -136,9 +133,12 @@ class SignupForm extends Component {
   }
   
   render() {
+    
     if (this.state.loading) {
       return <Loading />
     }
+    
+
     return (
       <Root onPress={this._onOutsidePress}>
         <BackButton onPress={this.props.onBackPress}>

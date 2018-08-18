@@ -10,6 +10,8 @@ import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
 
+import HeaderAvatar from './components/HeaderAvatar';
+
 import { colors } from './utils/constants';
 
 
@@ -68,7 +70,10 @@ const Tabs = TabNavigator({
 
 const AppMainNav = StackNavigator({
   Home: {
-    screen: Tabs
+    screen: Tabs,
+    navigationOptions: () => ({
+      headerLeft: <HeaderAvatar />
+    })
   }
 }, {
     cardStyle: {
@@ -90,7 +95,7 @@ class AppNavigator extends Component {
     const nav = addNavigationHelpers({
       dispatch: this.props.dispatch,
       state: this.props.nav,
-      //addListener: createReactNavigationReduxMiddleware("root")
+      addListener: createReactNavigationReduxMiddleware("root")
     });
     if (!this.props.user.isAuthenticated) {
       return <AuthenticationScreen />

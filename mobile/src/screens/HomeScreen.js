@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { graphql } from 'react-apollo';
+import { graphql, compose, withApollo } from 'react-apollo';
 import { ActivityIndicator, FlatList } from 'react-native';
-
-import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
+import { connect } from 'react-redux';
 
 import FeedCard from '../components/FeedCard/FeedCard';
+
+import { getUserInfo } from '../actions/user';
+
+import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
+import ME_QUERY from '../graphql/queries/me';
 
 const Root = styled.View`
   flex: 1;
@@ -19,10 +23,20 @@ const List = styled.ScrollView`
 // alignItems이든, justifyContent 든 flex-start 하면, flexDirection에 따라 결정.
 
 class HomeScreen extends Component {
+  conponentDidMount() {
+    this._getUserInfo();
+  }
+
+  _getUserInfo = async () => {
+    const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
+    this.props.getUserInfo(me);
+  }
+
   _renderItem = ({ item }) => <FeedCard {...item} />
   // <FeedCard text={item.text} user={item.user} createdAt={item.createdAt} favoriteCount={item.favoriteCount} />
   render() {
     const { data } = this.props;
+    console.log(data);
     if (data.loading) {
       return (
         <Root>
@@ -43,4 +57,7 @@ class HomeScreen extends Component {
   }
 }
 
-export default graphql(GET_TWEETS_QUERY)(HomeScreen);
+export default withApollo(compose(
+  connect(undefined, { getUserInfo }),
+  graphql(GET_TWEETS_QUERY)
+)(HomeScreen));

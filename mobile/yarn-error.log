@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add date-fns
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\DAUM\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\SQL Anywhere 12\bin64;C:\Program Files\SQL Anywhere 12\bin32;D:\YSR2000\UBeditor;C:\Program Files (x86)\UBcare\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Users\DAUM\AppData\Local\Android\Sdk\platform-tools;C:\Users\DAUM\AppData\Local\Microsoft\WindowsApps;D:\YSR2000\Exe;D:\YSR2000\Tool;C:\Users\DAUM\AppData\Local\Yarn\bin;C:\Users\DAUM\AppData\Roaming\npm
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\DAUM\Desktop\App\twitter-clone\mobile\node_modules\@expo\vector-icons\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\DAUM\Desktop\App\twitter-clone\mobile\node_modules\@appandflow\touchable\node_modules\.bin'
 
 npm manifest: 
   {
@@ -30,12 +30,13 @@ npm manifest:
     "dependencies": {
       "@appandflow/touchable": "^2.0.0",
       "apollo-client": "^1.9.0-0",
+      "date-fns": "^1.29.0",
       "expo": "^23.0.0",
       "graphql-tag": "^2.9.2",
       "react": "^16.0.0-alpha.12",
       "react-apollo": "^1.4.8",
       "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
-      "react-navigation": "^1.0.0-beta.11",
+      "react-navigation": "^2.11.2",
       "react-navigation-redux-helpers": "^2.0.5",
       "react-redux": "^5.0.5",
       "redux": "^3.7.2",
@@ -47,7 +48,8 @@ npm manifest:
       "eslint-config-equimper": "^2.2.1",
       "eslint-config-prettier": "^2.3.0",
       "prettier": "^1.5.3",
-      "redux-devtools-extension": "^2.13.2"
+      "redux-devtools-extension": "^2.13.2",
+      "redux-logger": "^3.0.6"
     }
   }
 
@@ -146,21 +148,9 @@ Lockfile:
       lodash "^4.17.4"
       react-native-vector-icons "4.5.0"
   
-  "@types/async@^2.0.31":
-    version "2.0.49"
-    resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.49.tgz#92e33d13f74c895cb9a7f38ba97db8431ed14bc0"
-  
   "@types/graphql@0.10.2":
     version "0.10.2"
     resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.10.2.tgz#d7c79acbaa17453b6681c80c34b38fcb10c4c08c"
-  
-  "@types/graphql@^0.9.0":
-    version "0.9.4"
-    resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.4.tgz#cdeb6bcbef9b6c584374b81aa7f48ecf3da404fa"
-  
-  "@types/isomorphic-fetch@0.0.34":
-    version "0.0.34"
-    resolved "https://registry.yarnpkg.com/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.34.tgz#3c3483e606c041378438e951464f00e4e60706d6"
   
   abbrev@1:
     version "1.1.1"
@@ -287,22 +277,7 @@ Lockfile:
       micromatch "^3.1.4"
       normalize-path "^2.1.1"
   
-  apollo-client@1.9.0-0:
-    version "1.9.0-0"
-    resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.9.0-0.tgz#4dc835d89bab577458d6522809eb05b007408cc9"
-    dependencies:
-      graphql "^0.10.0"
-      graphql-anywhere "^3.0.1"
-      graphql-tag "^2.0.0"
-      redux "^3.4.0"
-      symbol-observable "^1.0.2"
-      whatwg-fetch "^2.0.0"
-    optionalDependencies:
-      "@types/async" "^2.0.31"
-      "@types/graphql" "^0.9.0"
-      "@types/isomorphic-fetch" "0.0.34"
-  
-  apollo-client@^1.4.0:
+  apollo-client@^1.4.0, apollo-client@^1.9.0-0:
     version "1.9.3"
     resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.9.3.tgz#37000b3c801f4571b7b089739e696a158896aeab"
     dependencies:
@@ -1628,6 +1603,10 @@ Lockfile:
     dependencies:
       assert-plus "^1.0.0"
   
+  date-fns@^1.29.0:
+    version "1.29.0"
+    resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
+  
   debug@2.6.9, debug@^2.1.1, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
     version "2.6.9"
     resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -1657,6 +1636,10 @@ Lockfile:
   dedent@^0.6.0:
     version "0.6.0"
     resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.6.0.tgz#0e6da8f0ce52838ef5cec5c8f9396b0c1b64a3cb"
+  
+  deep-diff@^0.3.5:
+    version "0.3.8"
+    resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
   
   deep-extend@^0.6.0:
     version "0.6.0"
@@ -4278,7 +4261,7 @@ Lockfile:
     dependencies:
       invariant "^2.2.2"
   
-  react-navigation@^1.0.0-beta.11:
+  react-navigation@^1.0.1:
     version "1.5.12"
     resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-1.5.12.tgz#e226b4906c76dde55ddf7cc0a62ea04c77140d8a"
     dependencies:
@@ -4400,6 +4383,12 @@ Lockfile:
   redux-devtools-extension@^2.13.2:
     version "2.13.5"
     resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.5.tgz#3ff34f7227acfeef3964194f5f7fc2765e5c5a39"
+  
+  redux-logger@^3.0.6:
+    version "3.0.6"
+    resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+    dependencies:
+      deep-diff "^0.3.5"
   
   redux-thunk@^2.2.0:
     version "2.3.0"
