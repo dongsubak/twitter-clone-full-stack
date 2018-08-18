@@ -14,7 +14,7 @@ export function getUserInfo(info) {
 }
 
 export function logout() {
-  return async (dispatch) {
+  return async (dispatch) => {
     try {
       await AsyncStorage.removeItem('@twitterclone');
       return dispatch({
