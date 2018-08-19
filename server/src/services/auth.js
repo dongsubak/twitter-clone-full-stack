@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import constants from '../config/constants';
 import User from '../models/User';
+import { composeTransforms } from '../../node_modules/graphql-tools/dist/transforms/transforms';
 
 export async function requireAuth(user) {
   if (!user || !user._id) {

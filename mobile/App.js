@@ -32,7 +32,7 @@ export default class App extends React.Component {
         store.dispatch(login());
       }
       this.setState({ appIsReady: true });
-      console.log('appIsReady');
+      
     } catch (error) {
       throw error;
     }

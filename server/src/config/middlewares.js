@@ -17,6 +17,8 @@ const schema = makeExecutableSchema({
 async function auth(req, res, next) {
   try {
     const token = req.headers.authorization;
+    console.log(req.headers);
+    console.log(token);
     if (token != null) {
       const user = await decodeToken(token);
       req.user = user; // eslint-disable-line

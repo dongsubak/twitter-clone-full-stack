@@ -36,7 +36,6 @@ class HomeScreen extends Component {
   // <FeedCard text={item.text} user={item.user} createdAt={item.createdAt} favoriteCount={item.favoriteCount} />
   render() {
     const { data } = this.props;
-    console.log(data);
     if (data.loading) {
       return (
         <Root>
