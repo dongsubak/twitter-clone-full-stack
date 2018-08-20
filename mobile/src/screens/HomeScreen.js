@@ -23,7 +23,7 @@ const List = styled.ScrollView`
 // alignItems이든, justifyContent 든 flex-start 하면, flexDirection에 따라 결정.
 
 class HomeScreen extends Component {
-  conponentDidMount() {
+  componentDidMount() {
     this._getUserInfo();
   }
 

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-// import { Platform, Keyboard } from 'react-native';
-import { graphql } from 'react-apollo';
+import { Platform, Keyboard } from 'react-native';
+import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import { colors } from '../utils/constants';
 import CREATE_TWEET_MUTATION from '../graphql/mutations/createTweet';
+import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
 
 const Root = styled.View`
   backgroundColor: ${props => props.theme.WHITE};
@@ -68,11 +70,38 @@ class NewTweetScreen extends Component {
   _onChangeText = text => {console.log(text); this.setState({ text });}
 
   _onCreateTweetPress = async () => {
+    const { user } = this.props;
+
     await this.props.mutate({
       variables: {
         text: this.state.text
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createTweet: {
+          __typename: 'Tweet',
+          text: this.state.text,
+          favoriteCount: 0,
+          _id: Math.round(Math.random() * -1000000),
+          createdAt: new Date(),
+          user: {
+            __typename: 'User',
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            avatar: user.avatar
+          }
+        }
+      },
+      update: (store, { data: { createTweet } }) => {
+        const data = store.readQuery({ query: GET_TWEETS_QUERY });
+        if (!data.getTweets.find(t => t._id === createTweet._id)) {
+          store.writeQuery({ query: GET_TWEETS_QUERY, data: { getTweets: [{ ...createTweet }, ...data.getTweets ]}})
+        }
       }
     });
+    Keyboard.dismiss();
+    this.props.navigation.goBack(null);
   }
 
   get _textLength() {
@@ -98,4 +127,7 @@ class NewTweetScreen extends Component {
   }
 }
 // componentWillUnmount() {Keyboard.dismiss();}
-export default graphql(CREATE_TWEET_MUTATION)(NewTweetScreen);
+export default compose(
+  graphql(CREATE_TWEET_MUTATION),
+  connect(state => ({ user: state.user.info }))
+)(NewTweetScreen);

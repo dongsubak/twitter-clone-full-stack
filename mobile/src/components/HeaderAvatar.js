@@ -22,20 +22,21 @@ class HeaderAvatar extends Component {
   _onOpenActionSheet = () => {
     const options = ['Logout', 'Cancel'];
     const destructiveButtonIndex = 0;
-    this.props.showActionSheetWithOptions({
+    this.props.showActionSheetWithOptions(
+      {
       options,
       destructiveButtonIndex
-    }, buttonIndex => {
-      if (buttonIndex == 0) {
-        this.props.client.resetStore();
-        //WithApollo로 맨 밑에 감싸고 나서 적는다. Apollo Authentication에 docs로 나온다.
-        return this.props.logout();
-        // 맨 밑의 connect state에 있는 logout이다.
-      }
+      }, 
+      buttonIndex => {
+        if (buttonIndex == 0) {
+          this.props.client.resetStore();
+          //WithApollo로 맨 밑에 감싸고 나서 적는다. Apollo Authentication에 docs로 나온다.
+          return this.props.logout();
+          // 맨 밑의 connect state에 있는 logout이다.
+        }
     });
   }
   render() {
-    
     if (!this.props.info) {
       return (
         <ButtonHeader side="left" disabled>

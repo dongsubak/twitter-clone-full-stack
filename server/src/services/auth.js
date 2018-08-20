@@ -18,8 +18,8 @@ export async function requireAuth(user) {
 
 export function decodeToken(token) {
   const arr = token.split(' ');
-  
-  if (arr[0] === 'Bearer') {
+  console.log(arr[1]);
+  if (arr[0] == 'Bearer') {
     return jwt.verify(arr[1], constants.JWT_SECRET);
   }
   

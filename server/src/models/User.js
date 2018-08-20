@@ -1,4 +1,4 @@
-import mongoose, { schema, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { hashSync, compareSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
@@ -21,7 +21,6 @@ UserSchema.pre('save', function(next) {
     this.password = this._hashPassword(this.password);
     return next();
   }
-
   return next();
 });
 
@@ -38,7 +37,7 @@ UserSchema.methods = {
         _id: this._id
       },
       constants.JWT_SECRET
-    )
+    );
   }
 }
 

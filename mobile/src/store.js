@@ -23,7 +23,7 @@ networkInterface.use([{
       const token = await AsyncStorage.getItem('@twitterclone');
       // removeItem, getItem 바꿔가면서 로그인, 로그아웃하면서
       if (token != null) {
-        req.options.headers.authorization = 'Bearer ${token}' || null;
+        req.options.headers.authorization = ("Bearer "+token) || null;
       }
     } catch (error) {
       throw error;

@@ -27,7 +27,7 @@ export default class App extends React.Component {
   _checkIfToken = async () => {
     try {
       const token = await AsyncStorage.getItem('@twitterclone');
-      console.log(token);
+      console.log(token,"App");
       if (token != null) {
         store.dispatch(login());
       }
