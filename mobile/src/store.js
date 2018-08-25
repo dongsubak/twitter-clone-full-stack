@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws';
 
 import reducers from './reducers';
 
@@ -13,6 +14,11 @@ const networkInterface = createNetworkInterface({
 });
 // ethernet adapter ip 로 한다.
 // https://www.youtube.com/watch?v=shstJgkLW-I
+
+const wsClient = new SubscriptionClient('ws://localhost:3000/subscriptions', {
+  reconnect: true,
+  connectionParams: {}
+})
 
 networkInterface.use([{
   async applyMiddleware(req, next) {
@@ -23,7 +29,7 @@ networkInterface.use([{
       const token = await AsyncStorage.getItem('@twitterclone');
       // removeItem, getItem 바꿔가면서 로그인, 로그아웃하면서
       if (token != null) {
-        req.options.headers.authorization = ("Bearer "+token) || null;
+        req.options.headers.authorization = `Bearer ${token}` || null;
       }
     } catch (error) {
       throw error;
@@ -32,6 +38,11 @@ networkInterface.use([{
     return next();
   }
 }]);
+
+const networkInterfaceWithSubs = addGraphQLSubscriptions(
+  networkInterface,
+  wsClient
+)
 
 export const client = new ApolloClient({
   networkInterface,

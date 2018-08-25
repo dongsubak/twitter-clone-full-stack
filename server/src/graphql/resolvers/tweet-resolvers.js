@@ -1,5 +1,9 @@
 import Tweet from '../../models/Tweet';
+import FavoriteTweet from '../../models/FavoriteTweet';
 import { requireAuth } from '../../services/auth';
+import { pubsub } from '../../config/pubsub';
+
+const TWEET_ADDED = 'tweetAdded';
 
 export default {
     getTweet: async (_, { _id }, { user }) => {
@@ -12,7 +16,7 @@ export default {
     },
     getTweets: async (_, args, { user }) => {
       try {
-        // await requireAuth(user);
+        await requireAuth(user);
         return Tweet.find({}).sort({ createdAt: -1})
       } catch (error) {
         throw error;
@@ -29,7 +33,11 @@ export default {
     createTweet: async (_, args, { user }) => {
       try {
         await requireAuth(user); // { user } is context of user
-        return Tweet.create({ ...args, user: user._id });
+        const tweet = await Tweet.create({ ...args, user: user._id });
+       
+        pubsub.publish(TWEET_ADDED, { [TWEET_ADDED]: tweet });
+
+        return tweet;
       } catch (error) {
         throw error;  
       }
@@ -67,6 +75,18 @@ export default {
       } catch (error) {
         throw error;
       }
+    },
+    favoriteTweet: async (_, { _id }, { user }) => {
+      try {
+        await requireAuth(user);
+        const favorites = await FavoriteTweet.findOne({ userId: user._id });
+        
+        return favorites.userFavoritedTweet(_id);
+      } catch (error) {
+        throw error;
+      }
+    },
+    tweetAdded: {
+      subscribe: () => pubsub.asyncIterator(TWEET_ADDED)
     }
-    
 }

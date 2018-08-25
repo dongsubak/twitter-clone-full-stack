@@ -1,27 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D eslint eslint-config-equimper prettier eslint-config-prettier
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add subscription-transport-ws
 
 PATH: 
-  C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\SQL Anywhere 12\bin64;C:\Program Files\SQL Anywhere 12\bin32;C:\YSR2000\UBeditor;C:\Program Files (x86)\UBcare\Common;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\Users\user2\AppData\Local\Microsoft\WindowsApps;C:\YSR2000\Exe\;C:\YSR2000\Tool\;C:\Users\user2\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Bandizip\;C:\Users\user2\AppData\Local\Yarn\bin
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\DAUM\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\SQL Anywhere 12\bin64;C:\Program Files\SQL Anywhere 12\bin32;D:\YSR2000\UBeditor;C:\Program Files (x86)\UBcare\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Users\DAUM\AppData\Local\Android\Sdk\platform-tools;C:\Users\DAUM\AppData\Local\Microsoft\WindowsApps;D:\YSR2000\Exe;D:\YSR2000\Tool;C:\Users\DAUM\AppData\Local\Yarn\bin;C:\Users\DAUM\AppData\Roaming\npm
 
 Yarn version: 
-  1.9.0-20180626.1731
+  1.7.0
 
 Node version: 
-  8.11.2
+  8.11.3
 
 Platform: 
   win32 x64
 
 Trace: 
-  Invariant Violation: could not find a copy of eslint to link in C:\Users\user2\Desktop\app\twitter-clone\server\node_modules\eslint-config-equimper\node_modules
-      at invariant (C:\Program Files (x86)\Yarn\lib\cli.js:1739:15)
-      at PackageLinker.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:50556:7)
-      at Generator.next (<anonymous>)
-      at step (C:\Program Files (x86)\Yarn\lib\cli.js:98:30)
-      at C:\Program Files (x86)\Yarn\lib\cli.js:109:13
-      at <anonymous>
-      at process._tickCallback (internal/process/next_tick.js:188:7)
+  Error: https://registry.yarnpkg.com/subscription-transport-ws: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65656:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:134675:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:135658:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:135578:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)
 
 npm manifest: 
   {
@@ -34,9 +37,16 @@ npm manifest:
       "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write 'src/**/*.js'"
     },
     "dependencies": {
+      "apollo-server-express": "^1.3.6",
+      "bcrypt-nodejs": "^0.0.3",
       "body-parser": "^1.18.3",
       "cross-env": "^5.2.0",
       "express": "^4.16.3",
+      "faker": "^4.1.0",
+      "graphql": "^0.13.2",
+      "graphql-date": "^1.0.3",
+      "graphql-tools": "^3.0.4",
+      "jsonwebtoken": "^8.3.0",
       "mongoose": "^4.11.3"
     },
     "devDependencies": {
@@ -135,6 +145,10 @@ Lockfile:
       lodash "^4.2.0"
       to-fast-properties "^2.0.0"
   
+  "@types/node@^9.4.6":
+    version "9.6.22"
+    resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.22.tgz#05b55093faaadedea7a4b3f76e9a61346a6dd209"
+  
   abbrev@1:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -230,6 +244,51 @@ Lockfile:
       micromatch "^3.1.4"
       normalize-path "^2.1.1"
   
+  apollo-cache-control@^0.1.0:
+    version "0.1.1"
+    resolved "https://registry.yarnpkg.com/apollo-cache-control/-/apollo-cache-control-0.1.1.tgz#173d14ceb3eb9e7cb53de7eb8b61bee6159d4171"
+    dependencies:
+      graphql-extensions "^0.0.x"
+  
+  apollo-link@1.2.1:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.1.tgz#c120b16059f9bd93401b9f72b94d2f80f3f305d2"
+    dependencies:
+      "@types/node" "^9.4.6"
+      apollo-utilities "^1.0.0"
+      zen-observable-ts "^0.8.6"
+  
+  apollo-server-core@^1.3.6:
+    version "1.3.6"
+    resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-1.3.6.tgz#08636243c2de56fa8c267d68dd602cb1fbd323e3"
+    dependencies:
+      apollo-cache-control "^0.1.0"
+      apollo-tracing "^0.1.0"
+      graphql-extensions "^0.0.x"
+  
+  apollo-server-express@^1.3.6:
+    version "1.3.6"
+    resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.3.6.tgz#2120b05021a87def44fafd846e8a0e2a32852db7"
+    dependencies:
+      apollo-server-core "^1.3.6"
+      apollo-server-module-graphiql "^1.3.4"
+  
+  apollo-server-module-graphiql@^1.3.4:
+    version "1.3.4"
+    resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.3.4.tgz#50399b7c51b7267d0c841529f5173e5fc7304de4"
+  
+  apollo-tracing@^0.1.0:
+    version "0.1.4"
+    resolved "https://registry.yarnpkg.com/apollo-tracing/-/apollo-tracing-0.1.4.tgz#5b8ae1b01526b160ee6e552a7f131923a9aedcc7"
+    dependencies:
+      graphql-extensions "~0.0.9"
+  
+  apollo-utilities@^1.0.0, apollo-utilities@^1.0.1:
+    version "1.0.16"
+    resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.16.tgz#787310df4c3900a68c0beb3d351c59725a588cdb"
+    dependencies:
+      fast-json-stable-stringify "^2.0.0"
+  
   aproba@^1.0.3:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
@@ -304,6 +363,13 @@ Lockfile:
   arrify@^1.0.0:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
+  
+  assert-err@^1.0.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/assert-err/-/assert-err-1.1.0.tgz#c05062799a1d97d3f5eaa258e3242aab499fc8ef"
+    dependencies:
+      escape-string-regexp "^1.0.5"
+      object-assign "^4.1.0"
   
   assign-symbols@^1.0.0:
     version "1.0.0"
@@ -862,6 +928,10 @@ Lockfile:
       mixin-deep "^1.2.0"
       pascalcase "^0.1.1"
   
+  bcrypt-nodejs@^0.0.3:
+    version "0.0.3"
+    resolved "https://registry.yarnpkg.com/bcrypt-nodejs/-/bcrypt-nodejs-0.0.3.tgz#c60917f26dc235661566c681061c303c2b28842b"
+  
   binary-extensions@^1.0.0:
     version "1.11.0"
     resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.11.0.tgz#46aa1751fb6a2f93ee5e689bb1087d4b14c6c205"
@@ -952,6 +1022,10 @@ Lockfile:
   bson@~1.0.4:
     version "1.0.9"
     resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.9.tgz#12319f8323b1254739b7c6bef8d3e89ae05a2f57"
+  
+  buffer-equal-constant-time@1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
   
   buffer-from@^1.0.0:
     version "1.1.0"
@@ -1191,7 +1265,7 @@ Lockfile:
     version "0.1.1"
     resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   
-  core-js@^2.4.0, core-js@^2.5.0:
+  core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.3:
     version "2.5.7"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
   
@@ -1318,6 +1392,10 @@ Lockfile:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   
+  deprecated-decorator@^0.1.6:
+    version "0.1.6"
+    resolved "https://registry.yarnpkg.com/deprecated-decorator/-/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
+  
   destroy@~1.0.4:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
@@ -1358,6 +1436,12 @@ Lockfile:
   duplexer@~0.1.1:
     version "0.1.1"
     resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
+  
+  ecdsa-sig-formatter@1.0.10:
+    version "1.0.10"
+    resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.10.tgz#1c595000f04a8897dfb85000892a0f4c33af86c3"
+    dependencies:
+      safe-buffer "^5.0.1"
   
   ee-first@1.1.1:
     version "1.1.1"
@@ -1809,6 +1893,10 @@ Lockfile:
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
   
+  faker@^4.1.0:
+    version "4.1.0"
+    resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
+  
   fast-deep-equal@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
@@ -2069,6 +2157,35 @@ Lockfile:
   graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
     version "4.1.11"
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+  
+  graphql-date@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/graphql-date/-/graphql-date-1.0.3.tgz#31ce05ae40ed8c8ceb040364060109771e712e91"
+    dependencies:
+      assert-err "^1.0.0"
+  
+  graphql-extensions@^0.0.x, graphql-extensions@~0.0.9:
+    version "0.0.10"
+    resolved "https://registry.yarnpkg.com/graphql-extensions/-/graphql-extensions-0.0.10.tgz#34bdb2546d43f6a5bc89ab23c295ec0466c6843d"
+    dependencies:
+      core-js "^2.5.3"
+      source-map-support "^0.5.1"
+  
+  graphql-tools@^3.0.4:
+    version "3.0.4"
+    resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-3.0.4.tgz#d08aa75db111d704cba05d92afd67ec5d1dc6b24"
+    dependencies:
+      apollo-link "1.2.1"
+      apollo-utilities "^1.0.1"
+      deprecated-decorator "^0.1.6"
+      iterall "^1.1.3"
+      uuid "^3.1.0"
+  
+  graphql@^0.13.2:
+    version "0.13.2"
+    resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
+    dependencies:
+      iterall "^1.2.1"
   
   has-ansi@^2.0.0:
     version "2.0.0"
@@ -2515,6 +2632,10 @@ Lockfile:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   
+  iterall@^1.1.3, iterall@^1.2.1:
+    version "1.2.2"
+    resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.2.tgz#92d70deb8028e0c39ff3164fdbf4d8b088130cd7"
+  
   js-tokens@^3.0.0, js-tokens@^3.0.2:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
@@ -2564,11 +2685,40 @@ Lockfile:
     version "4.0.1"
     resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.1.tgz#4fd92cb34e0e9db3c89c8622ecf51f9b978c6cb9"
   
+  jsonwebtoken@^8.3.0:
+    version "8.3.0"
+    resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.3.0.tgz#056c90eee9a65ed6e6c72ddb0a1d325109aaf643"
+    dependencies:
+      jws "^3.1.5"
+      lodash.includes "^4.3.0"
+      lodash.isboolean "^3.0.3"
+      lodash.isinteger "^4.0.4"
+      lodash.isnumber "^3.0.3"
+      lodash.isplainobject "^4.0.6"
+      lodash.isstring "^4.0.1"
+      lodash.once "^4.0.0"
+      ms "^2.1.1"
+  
   jsx-ast-utils@^2.0.0, jsx-ast-utils@^2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.0.1.tgz#e801b1b39985e20fffc87b40e3748080e2dcac7f"
     dependencies:
       array-includes "^3.0.3"
+  
+  jwa@^1.1.5:
+    version "1.1.6"
+    resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.1.6.tgz#87240e76c9808dbde18783cf2264ef4929ee50e6"
+    dependencies:
+      buffer-equal-constant-time "1.0.1"
+      ecdsa-sig-formatter "1.0.10"
+      safe-buffer "^5.0.1"
+  
+  jws@^3.1.5:
+    version "3.1.5"
+    resolved "https://registry.yarnpkg.com/jws/-/jws-3.1.5.tgz#80d12d05b293d1e841e7cb8b4e69e561adcf834f"
+    dependencies:
+      jwa "^1.1.5"
+      safe-buffer "^5.0.1"
   
   kareem@1.5.0:
     version "1.5.0"
@@ -2630,6 +2780,34 @@ Lockfile:
   lodash.get@4.4.2:
     version "4.4.2"
     resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  
+  lodash.includes@^4.3.0:
+    version "4.3.0"
+    resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
+  
+  lodash.isboolean@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
+  
+  lodash.isinteger@^4.0.4:
+    version "4.0.4"
+    resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
+  
+  lodash.isnumber@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
+  
+  lodash.isplainobject@^4.0.6:
+    version "4.0.6"
+    resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
+  
+  lodash.isstring@^4.0.1:
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
+  
+  lodash.once@^4.0.0:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   
   lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
     version "4.17.10"
@@ -2835,6 +3013,10 @@ Lockfile:
   ms@2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+  
+  ms@^2.1.1:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   
   muri@1.3.0:
     version "1.3.0"
@@ -3732,6 +3914,13 @@ Lockfile:
     dependencies:
       source-map "^0.5.6"
   
+  source-map-support@^0.5.1:
+    version "0.5.6"
+    resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.6.tgz#4435cee46b1aab62b8e8610ce60f788091c51c13"
+    dependencies:
+      buffer-from "^1.0.0"
+      source-map "^0.6.0"
+  
   source-map-url@^0.4.0:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
@@ -3739,6 +3928,10 @@ Lockfile:
   source-map@^0.5.0, source-map@^0.5.6, source-map@^0.5.7:
     version "0.5.7"
     resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
+  
+  source-map@^0.6.0:
+    version "0.6.1"
+    resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   
   spdx-correct@^3.0.0:
     version "3.0.0"
@@ -4064,6 +4257,10 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   
+  uuid@^3.1.0:
+    version "3.3.2"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  
   v8flags@^2.1.1:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-2.1.1.tgz#aab1a1fa30d45f88dd321148875ac02c0b55e5b4"
@@ -4136,3 +4333,13 @@ Lockfile:
   yallist@^3.0.0, yallist@^3.0.2:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.0.2.tgz#8452b4bb7e83c7c188d8041c1a837c773d6d8bb9"
+  
+  zen-observable-ts@^0.8.6:
+    version "0.8.9"
+    resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.9.tgz#d3c97af08c0afdca37ebcadf7cc3ee96bda9bab1"
+    dependencies:
+      zen-observable "^0.8.0"
+  
+  zen-observable@^0.8.0:
+    version "0.8.8"
+    resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.8.tgz#1ea93995bf098754a58215a1e0a7309e5749ec42"

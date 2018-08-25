@@ -10,6 +10,7 @@ import { getUserInfo } from '../actions/user';
 
 import GET_TWEETS_QUERY from '../graphql/queries/getTweets';
 import ME_QUERY from '../graphql/queries/me';
+import TWEET_ADDED_SUBSCRIPTION from '../graphql/subscriptions/tweetAdded';
 
 const Root = styled.View`
   flex: 1;
@@ -23,6 +24,25 @@ const List = styled.ScrollView`
 // alignItems이든, justifyContent 든 flex-start 하면, flexDirection에 따라 결정.
 
 class HomeScreen extends Component {
+  componentWillMount() {
+    this.props.data.subscribeToMore({
+      document: TWEET_ADDED_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        const newTweet = subscriptionData.data.tweetAdded;
+
+        if (!prev.getTweets.find(t => t._id === newTweet._id )) {
+          return {
+            ...prev,
+            getTweets: [{ ...newTweet }, ...prev.getTweets]
+          }
+        }
+      }
+    })
+  }
   componentDidMount() {
     this._getUserInfo();
   }
