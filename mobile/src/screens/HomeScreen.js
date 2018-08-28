@@ -82,12 +82,20 @@ class HomeScreen extends Component {
 
   _renderItem = ({ item }) => <FeedCard {...item} />
   // <FeedCard text={item.text} user={item.user} createdAt={item.createdAt} favoriteCount={item.favoriteCount} />
+
+  _renderPlaceholder = () => <FeedCard placeholder isLoaded={this.props.data.loading} />
+  
   render() {
     const { data } = this.props;
     if (data.loading) {
       return (
         <Root>
-          <ActivityIndicator size="large" />
+          <FlatList 
+            contentContainerStyle={{ alignSelf: 'stretch' }}
+            data={[1, 2, 3]}
+            renderItem={this._renderPlaceholder}
+            keyExtractor={item => item}
+          />
         </Root>
       )
     }

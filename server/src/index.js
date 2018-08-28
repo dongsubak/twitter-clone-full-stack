@@ -19,6 +19,9 @@ const app = express();
 
 middlewares(app);
 
+app.use((req, res, next) => setTimeout(next, 0));
+// app.use((req, res, next) => setTimeout(next, 5000));
+
 app.use(
   '/graphiql', 
   graphiqlExpress({
