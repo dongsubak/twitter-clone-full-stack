@@ -5,6 +5,25 @@ import { pubsub } from '../../config/pubsub';
 
 const TWEET_ADDED = 'tweetAdded';
 
+const user = {
+  name: 'ds'
+}
+
+const user1 = {
+  country: 'Canada'
+}
+
+const newUser = {
+  ...user,
+  ...user1
+}
+const oldUser = {
+  user,
+  user1
+}
+
+/* newUser = { name: 'ds', country: 'Canada'} , oldUser = { {name: 'ds'}, {country: 'Canada'}} */
+
 export default {
     getTweet: async (_, { _id }, { user }) => {
       try {
@@ -17,7 +36,30 @@ export default {
     getTweets: async (_, args, { user }) => {
       try {
         await requireAuth(user);
-        return Tweet.find({}).sort({ createdAt: -1})
+        const p1 = Tweet.find({}).sort({ createdAt: -1 });
+        const p2 = FavoriteTweet.findOne({ userId: user._id });
+
+        const [tweets, favorites] = await Promise.all([p1, p2]);
+
+        const tweetsToSend = tweets.reduce((arr, tweet) => {
+          const tw = tweet.toJSON();
+
+          if (favorites.tweets.some(t => t.equals(tweet._id))) {
+            arr.push({
+              ...tw,
+              isFavorited: true,
+            });
+          } else {
+            arr.push({
+              ...tw,
+              isFavorited: false,
+            })
+          }
+
+          return arr;
+        }, []);
+
+        return tweetsToSend;
       } catch (error) {
         throw error;
       }

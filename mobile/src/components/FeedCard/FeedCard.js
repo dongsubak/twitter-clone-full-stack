@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
+import { graphql } from 'react-apollo';
 
 import FeedCardHeader from './FeedCardHeader';
 import FeedCardBottom from './FeedCardBottom';
+import FAVORITE_TWEET_MUTATION from '../../graphql/mutations/favoriteTweet';
 
 const Root = styled.View`
   minHeight: 180;
@@ -30,7 +32,7 @@ const CardContentText = styled.Text`
 
 // const text = 'lorem';
 
-function FeedCard({ text, user, createdAt, favoriteCount }) {
+function FeedCard({ text, user, createdAt, favoriteCount, favorite, isFavorited }) {
   return (
     <Root>
       <FeedCardHeader { ...user } createdAt={createdAt} />
@@ -39,9 +41,30 @@ function FeedCard({ text, user, createdAt, favoriteCount }) {
           { text }
         </CardContentText>
       </CardContentContainer>
-      <FeedCardBottom favoriteCount={favoriteCount}/>
+      <FeedCardBottom
+        isFavorited={isFavorited} 
+        favoriteCount={favoriteCount} 
+        onFavoritePress={favorite}
+      />
     </Root>
   );
 }
 
-export default FeedCard;
+export default graphql(FAVORITE_TWEET_MUTATION, {
+  props: ({ ownProps, mutate }) => ({
+    favortie: () => mutate({
+      variables: { _id: ownProps._id  },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        favoriteTweet: {
+          __typename: 'Tweet',
+          _id: ownProps._id,
+          favoriteCount: ownProps.isFavorited 
+            ? ownProps.favoriteCount - 1 
+            : ownProps.favoriteCount + 1,
+          isFavorited: !ownProps.isFavorited
+        }
+      }  
+    })
+  })
+})(FeedCard);

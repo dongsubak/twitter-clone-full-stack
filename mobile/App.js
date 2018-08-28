@@ -23,11 +23,11 @@ export default class App extends React.Component {
   }
   componentDidMount() {
     this._checkIfToken();
-  }
+  } // AsyncStorage.removeItem('@twitterclone');
+  // server index.js에 mocks 지웠다 풀었다 하고, mobile App componentDidmount에 removeItem 했다 지웠다하고
   _checkIfToken = async () => {
     try {
       const token = await AsyncStorage.getItem('@twitterclone');
-      console.log(token,"App");
       if (token != null) {
         store.dispatch(login());
       }
