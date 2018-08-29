@@ -14,6 +14,14 @@ const UserSchema = new Schema({
   avatar: String,
   password: String,
   email: String,
+  followingsCount: {
+    type: Number,
+    default: 0
+  },
+  followersCount: {
+    type: Number,
+    default: 0
+  }
 }, { timestamps: true });
 
 UserSchema.pre('save', function(next) {
