@@ -40,6 +40,7 @@ UserSchema.methods = {
     return compareSync(password, this.password);
   },
   createToken() {
+    console.log('createToken');
     return jwt.sign(
       {
         _id: this._id

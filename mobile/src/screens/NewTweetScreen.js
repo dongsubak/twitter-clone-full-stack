@@ -92,15 +92,17 @@ class NewTweetScreen extends Component {
             lastName: user.lastName,
             avatar: user.avatar
           }
-        }
+        },
       },
       update: (store, { data: { createTweet } }) => {
         const data = store.readQuery({ query: GET_TWEETS_QUERY });
+        console.log(data);
         if (!data.getTweets.find(t => t._id === createTweet._id)) {
-          store.writeQuery({ query: GET_TWEETS_QUERY, data: { getTweets: [{ ...createTweet }, ...data.getTweets ]}})
+          store.writeQuery({ query: GET_TWEETS_QUERY, data: { getTweets: [{ ...createTweet }, ...data.getTweets ]}});
         }
       }
     });
+
     Keyboard.dismiss();
     this.props.navigation.goBack(null);
   }

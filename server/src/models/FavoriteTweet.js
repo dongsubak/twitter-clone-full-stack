@@ -12,11 +12,13 @@ const FavoriteTweetSchema = new Schema({
   tweets: [{
     type: Schema.Types.ObjectId,
     ref: 'Tweet'
-  }]
+  }],
+}, { 
+  usePushEach: true 
 });
 // Tweet.js , User.js 에서 User, Tweet 이라는 이름을 썼었다.
 
-FavoriteTweetSchema.method = {
+FavoriteTweetSchema.methods = {
   async userFavoritedTweet(tweetId) {
     if (this.tweets.some(t => t.equals(tweetId))) {
       this.tweets.pull(tweetId);

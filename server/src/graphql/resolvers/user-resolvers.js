@@ -8,8 +8,9 @@ export default {
     try {
       const [firstName, ... lastName] = fullName.split(' '); 
       const user = await User.create({firstName, lastName, ... rest });
+      console.log(user);
       await FavoriteTweet.create({ userId: user._id });
-      await FpllowingUser.create({ userId: user._id });
+      await FollowingUser.create({ userId: user._id });
 
       return {
         token: user.createToken(),

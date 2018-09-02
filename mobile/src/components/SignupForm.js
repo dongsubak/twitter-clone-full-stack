@@ -112,7 +112,6 @@ class SignupForm extends Component {
 
     const { fullName, email, password, username } = this.state;
     const avatar = fakeAvatar;
-  
     try {
       const { data } = await this.props.mutate({
         variables: {
@@ -120,11 +119,11 @@ class SignupForm extends Component {
           email, 
           password, 
           username,
-          avatar
-        }
+          avatar,
+        },
       });  
+      console.log(data);
       await AsyncStorage.setItem('@twitterclone', data.signup.token);
-      console.log('loading');
       this.setState({ loading: false });
       return this.props.login();
     } catch (error) {
@@ -133,12 +132,10 @@ class SignupForm extends Component {
   }
   
   render() {
-    
     if (this.state.loading) {
+      console.log('SignupForm loading')
       return <Loading />
     }
-    
-
     return (
       <Root onPress={this._onOutsidePress}>
         <BackButton onPress={this.props.onBackPress}>
@@ -176,9 +173,7 @@ class SignupForm extends Component {
           </InputWrapper>
         </Wrapper>
         <ButtonConfirm onPress={this._onSignupPress} disabled={this._checkIfDisable()}>
-          <ButtonConfirmText>
-            Sign Up
-          </ButtonConfirmText>
+          <ButtonConfirmText>Sign Up</ButtonConfirmText>
         </ButtonConfirm>
       </Root>
     );
@@ -189,5 +184,5 @@ class SignupForm extends Component {
 
 export default compose(
   graphql(SIGNUP_MUTATION),
-  connect(undefined, { login }) ,
-)(SignupForm);
+  connect(undefined, { login }))
+  (SignupForm,);

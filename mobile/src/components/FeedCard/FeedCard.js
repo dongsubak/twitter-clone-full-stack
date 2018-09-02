@@ -89,7 +89,7 @@ FeedCard.fragments = {
 }
 export default graphql(FAVORITE_TWEET_MUTATION, {
   props: ({ ownProps, mutate }) => ({
-    favortie: () => mutate({
+    favorite: () => mutate({
       variables: { _id: ownProps._id  },
       optimisticResponse: {
         __typename: 'Mutation',

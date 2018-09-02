@@ -21,7 +21,7 @@ export default {
     deleteTweet: TweetResolvers.deleteTweet,
     favoriteTweet: TweetResolvers.favoriteTweet,
     signup: UserResolvers.signup,
-    login: UserResolvers.login
+    login: UserResolvers.login,
   },
   Subscription: {
     tweetAdded: TweetResolvers.tweetAdded,

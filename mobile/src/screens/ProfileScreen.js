@@ -19,12 +19,11 @@ const T = styled.Text``;
 class ProfileScreen extends Component {
   state = {}
 
-  _renderItem = ({ item }) => <FeedCard { ... item } />;
+  _renderItem = ({ item }) => <FeedCard { ...item } />;
 
   _renderPlaceholder = () => (
-    <FeedCard { ... item } 
-     placeholder  
-     key={item}
+    <FeedCard 
+     placeholder 
      isLoaded={this.props.data.loading}
     />
   );
